@@ -31,10 +31,8 @@ jobs:
         shell: bash
 
       - name: Get GeoLite2
-        env:
-          LICENSE_KEY: ${{ secrets.MAXMIND_LICEHSE }}
         run: |
-          curl -L "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country-CSV&license_key=${LICENSE_KEY}&suffix=zip" -o GeoLite2-Country-CSV.zip
+          curl -L "https://dl.netsyms.net/dbs/geolite2/GeoLite2-Country-CSV.zip" -o GeoLite2-Country-CSV.zip
           unzip GeoLite2-Country-CSV.zip
           rm -f GeoLite2-Country-CSV.zip
           mv GeoLite2* geolite2
