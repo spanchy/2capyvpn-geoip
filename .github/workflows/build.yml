@@ -2,7 +2,7 @@ name: Build geoip.dat
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * 4"
+    - cron: '30 14 * * *'
   push:
     branches:
       - master
@@ -48,28 +48,16 @@ jobs:
             sha256sum ${name} > ./${name}.sha256sum
           done
 
-      - name: Git push assets to "release" branch
+      - name: Move files to publish directory
         run: |
-          cd output || exit 1
-          git init
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -b release
-          git add -A
-          git commit -m "${{ env.RELEASE_NAME }}"
-          git remote add geoip "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
-          git push -f geoip release
-
-      - name: Release and upload assets
-        run: |
-          gh release create ${{ env.TAG_NAME }} -t ${{ env.RELEASE_NAME }} \
-            ./output/geoip.dat \
-            ./output/geoip.dat.sha256sum \
-            ./output/geoip-only-cn-private.dat \
-            ./output/geoip-only-cn-private.dat.sha256sum \
-            ./output/cn.dat \
-            ./output/cn.dat.sha256sum \
-            ./output/private.dat \
-            ./output/private.dat.sha256sum
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          mkdir publish
+          mv output/*.dat publish
+          mv output/*.txt publish
+      - name: Publish release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.DAILY_TAG }}
+          name: ${{ env.DAILY_TAG }}
+          prerelease: false
+          draft: false
+          files: "publish/*"
