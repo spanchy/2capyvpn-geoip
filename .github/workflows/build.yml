@@ -27,6 +27,12 @@ jobs:
               ref: `refs/tags/${DAILY_TAG}`,
               sha: context.sha
             })
+      - name: Get GeoLite2
+        run: |
+          curl -L "https://dl.netsyms.net/dbs/geolite2/GeoLite2-Country-CSV.zip" -o GeoLite2-Country-CSV.zip
+          unzip GeoLite2-Country-CSV.zip
+          rm -f GeoLite2-Country-CSV.zip
+          mv GeoLite2* geolite2
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
