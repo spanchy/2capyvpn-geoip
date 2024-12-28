@@ -23,7 +23,7 @@
       "action": "add", 
       "args": {
         "name": "by",
-        "uri": "./addcustom/ru"
+        "uri": "./addcustom/by"
       }
     },
     {
@@ -31,7 +31,7 @@
       "action": "add", 
       "args": {
         "name": "kz",
-        "uri": "./addcustom/ru"
+        "uri": "./addcustom/kz"
       }
     },
     {
