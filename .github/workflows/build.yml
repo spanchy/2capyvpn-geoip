@@ -1,8 +1,16 @@
 name: Daily CI
-
 on:
+  workflow_dispatch:
   schedule:
     - cron: '30 14 * * *'
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - "README.md"
+      - ".gitignore"
+      - "LICENSE"
+      - "**/dependabot.yml"
 
 jobs:
   new-tag:
