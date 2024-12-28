@@ -39,7 +39,7 @@ jobs:
           go-version-file: go.mod
       - name: Build geoip.dat
         run: |
-          go run ./ -c config-ir.json
+          go run ./
       - name: Move files to publish directory
         run: |
           mkdir publish
