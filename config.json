@@ -15,7 +15,23 @@
       "action": "add", 
       "args": {
         "name": "ru",
-        "uri": "./custom_to_ru.txt"
+        "uri": "./addcustom/ru"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add", 
+      "args": {
+        "name": "by",
+        "uri": "./addcustom/ru"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add", 
+      "args": {
+        "name": "kz",
+        "uri": "./addcustom/ru"
       }
     },
     {
