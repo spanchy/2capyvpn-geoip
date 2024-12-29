@@ -14,7 +14,7 @@
       "type": "text",
       "action": "add", 
       "args": {
-        "name": "ru",
+        "name": "ya",
         "uri": "./addcustom/ru"
       }
     },
@@ -22,7 +22,7 @@
       "type": "text",
       "action": "add", 
       "args": {
-        "name": "by",
+        "name": "byz",
         "uri": "./addcustom/by"
       }
     },
@@ -30,7 +30,7 @@
       "type": "text",
       "action": "add", 
       "args": {
-        "name": "kz",
+        "name": "kzz",
         "uri": "./addcustom/kz"
       }
     },
