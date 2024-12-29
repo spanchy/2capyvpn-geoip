@@ -15,7 +15,7 @@
       "action": "add", 
       "args": {
         "name": "ru",
-        "uri": "./addcustom/rur"
+        "uri": "./addcustom/ru"
       }
     },
     {
