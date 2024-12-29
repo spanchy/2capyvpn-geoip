@@ -15,7 +15,7 @@
       "action": "add", 
       "args": {
         "name": "ru",
-        "uri": "https://raw.githubusercontent.com/hydraponique/roscomvpn-geoip/refs/heads/master/addcustom/ru"
+        "uri": "./addcustom/rur"
       }
     },
     {
@@ -23,7 +23,7 @@
       "action": "add", 
       "args": {
         "name": "by",
-        "uri": "https://raw.githubusercontent.com/hydraponique/roscomvpn-geoip/refs/heads/master/addcustom/by"
+        "uri": "./addcustom/by"
       }
     },
     {
@@ -31,7 +31,7 @@
       "action": "add", 
       "args": {
         "name": "kz",
-        "uri": "https://raw.githubusercontent.com/hydraponique/roscomvpn-geoip/refs/heads/master/addcustom/kz"
+        "uri": "./addcustom/kz"
       }
     },
     {
