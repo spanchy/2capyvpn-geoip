@@ -14,24 +14,24 @@
       "type": "text",
       "action": "add", 
       "args": {
-        "name": "ya",
-        "uri": "./addcustom/ru"
+        "name": "ru",
+        "uri": "https://raw.githubusercontent.com/hydraponique/roscomvpn-geoip/refs/heads/master/addcustom/ru"
       }
     },
     {
       "type": "text",
       "action": "add", 
       "args": {
-        "name": "byz",
-        "uri": "./addcustom/by"
+        "name": "by",
+        "uri": "https://raw.githubusercontent.com/hydraponique/roscomvpn-geoip/refs/heads/master/addcustom/by"
       }
     },
     {
       "type": "text",
       "action": "add", 
       "args": {
-        "name": "kzz",
-        "uri": "./addcustom/kz"
+        "name": "kz",
+        "uri": "https://raw.githubusercontent.com/hydraponique/roscomvpn-geoip/refs/heads/master/addcustom/kz"
       }
     },
     {
