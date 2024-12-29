@@ -1,8 +1,6 @@
-name: Daily CI
+name: Build geoip
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '30 14 * * *'
   push:
     branches:
       - master
