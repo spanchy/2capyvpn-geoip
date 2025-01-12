@@ -39,7 +39,7 @@
       "action": "add", 
       "args": {
         "name": "discord",
-        "uri": "https://github.com/fatyzzz/ipset-discord/blob/main/discord.txt"
+        "uri": "https://raw.githubusercontent.com/fatyzzz/ipset-discord/refs/heads/main/discord.txt"
       }
     },
     {
