@@ -35,6 +35,14 @@
       }
     },
     {
+      "type": "text",
+      "action": "add", 
+      "args": {
+        "name": "discord",
+        "uri": "./addcustom/discord"
+      }
+    },
+    {
       "type": "private",
       "action": "add"
     },
