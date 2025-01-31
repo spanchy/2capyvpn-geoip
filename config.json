@@ -43,14 +43,6 @@
       }
     },
     {
-      "type": "text",
-      "action": "add", 
-      "args": {
-        "name": "meta-fix",
-        "uri": "https://raw.githubusercontent.com/SecOps-Institute/FacebookIPLists/refs/heads/master/facebook_ipv6_list.lst"
-      }
-    },
-    {
       "type": "private",
       "action": "add"
     },
