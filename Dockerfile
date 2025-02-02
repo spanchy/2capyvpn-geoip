@@ -1,0 +1,28 @@
+FROM golang:1.23-alpine
+
+RUN apk add --no-cache git curl unzip
+
+RUN git clone https://github.com/v2fly/geoip.git /geoip
+
+COPY config.json /geoip/config.json
+
+RUN mkdir -p /geoip/changes
+
+COPY changes/ /geoip/changes/
+
+RUN mkdir -p /geoip/geolite2
+
+COPY GeoLite2-Country-CSV.zip /geoip/geolite2/
+
+RUN unzip -o /geoip/geolite2/GeoLite2-Country-CSV.zip -d /geoip/geolite2 && \
+    mv /geoip/geolite2/GeoLite2-Country-CSV_*/* /geoip/geolite2/ && \
+    rmdir /geoip/geolite2/GeoLite2-Country-CSV_*
+
+WORKDIR /geoip
+
+RUN go mod tidy
+RUN go mod download
+
+RUN go build -o geoip
+
+CMD ["./geoip", "-c", "config.json"]

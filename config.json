@@ -15,7 +15,7 @@
       "action": "add", 
       "args": {
         "name": "ru",
-        "uri": "./addcustom/ru"
+        "uri": "./changes/ru.txt"
       }
     },
     {
@@ -23,7 +23,7 @@
       "action": "add", 
       "args": {
         "name": "by",
-        "uri": "./addcustom/by"
+        "uri": "./changes/by.txt"
       }
     },
     {
@@ -31,7 +31,7 @@
       "action": "add", 
       "args": {
         "name": "kz",
-        "uri": "./addcustom/kz"
+        "uri": "./changes/kz.txt"
       }
     },
     {
