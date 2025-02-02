@@ -46,8 +46,8 @@ jobs:
       - name: Move files to publish directory
         run: |
           mkdir publish
-          mv output/dat/*.dat publish
-          mv output/text/*.txt publish
+          cp output/dat/*.dat publish
+          cp output/text/*.txt publish
 
       - name: Publish release
         uses: softprops/action-gh-release@v1
