@@ -1,6 +1,11 @@
 name: Build geoip
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - "README.md"
 
 jobs:
   new-tag:
