@@ -38,6 +38,14 @@
       "type": "text",
       "action": "add", 
       "args": {
+        "name": "threema",
+        "uri": "./changes/threema.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add", 
+      "args": {
         "name": "discord",
         "uri": "https://raw.githubusercontent.com/fatyzzz/ipset-discord/refs/heads/main/discord.txt"
       }
