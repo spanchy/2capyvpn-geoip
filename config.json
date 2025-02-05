@@ -46,14 +46,6 @@
       "type": "text",
       "action": "add", 
       "args": {
-        "name": "likee",
-        "uri": "./changes/likee.txt"
-      }
-    },
-    {
-      "type": "text",
-      "action": "add", 
-      "args": {
         "name": "discord",
         "uri": "https://raw.githubusercontent.com/fatyzzz/ipset-discord/refs/heads/main/discord.txt"
       }
