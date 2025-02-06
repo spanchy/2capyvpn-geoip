@@ -27,6 +27,8 @@
       {
         "type": "field",
         "ip": [
+          "geoip:private",
+          "geoip:test",
           "geoip:ru",
           "geoip:by",
           "geoip:kz"
