@@ -8,6 +8,8 @@ COPY config-preparing.json /geoip/config-preparing.json
 
 COPY config-finalise.json /geoip/config-finalise.json
 
+COPY build.sh /geoip/build.sh
+
 RUN mkdir -p /geoip/changes
 
 COPY changes/ /geoip/changes/
@@ -27,6 +29,4 @@ RUN go mod download
 
 RUN go build -o geoip
 
-CMD ["./geoip", "-c", "config-preparing.json"]
-
-CMD ["./geoip", "-c", "config-finalise.json"]
+CMD ./build.sh
