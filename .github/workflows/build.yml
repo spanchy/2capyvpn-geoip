@@ -57,12 +57,19 @@ jobs:
           cp output/dat/*.dat publish
           cp output/text/direct.txt publish
           cp output/text/proxy.txt publish
+          
+      - name: Purge jsdelivr CDN
+        run: |
+          cd publish || exit 1
+          for file in $(ls); do
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@release/${file}"
+          done
 
       - name: Publish release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ env.DAILY_TAG }}
           name: ${{ env.DAILY_TAG }}
-          prerelease: false
+          prerelease: true
           draft: false
           files: "publish/*"
