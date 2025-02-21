@@ -29,8 +29,8 @@ RUN mkdir -p /geoip/output/text/
 
 CMD ["./geoip", "-c", "config-preparing.json"]
 
-COPY output/text/ /geoip/changes/
+COPY /geoip/output/text/ /geoip/changes/
 
-RUN rm -rf output/text/*
+RUN rm -rf /geoip/output/text/*
 
 CMD ["./geoip", "-c", "config-finalise.json"]
