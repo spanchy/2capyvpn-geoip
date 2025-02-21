@@ -31,4 +31,4 @@ RUN go build -o geoip
 
 RUN chmod +x ./build.sh
 
-CMD ["./build.sh"]
+CMD ./build.sh
