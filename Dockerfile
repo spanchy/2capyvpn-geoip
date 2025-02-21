@@ -27,4 +27,4 @@ RUN go mod download
 
 RUN go build -o geoip
 
-CMD ["/bin/bash","-c","./geoip -c config-preparing.json && ./geoip -c config-finalise.json"]
+CMD ["sh","-c","./geoip -c config-preparing.json && ./geoip -c config-finalise.json"]
