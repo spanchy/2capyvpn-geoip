@@ -29,6 +29,6 @@ RUN go mod download
 
 RUN go build -o geoip
 
-RUN chmod +x ./build.sh
+RUN chmod +x /geoip/build.sh
 
-CMD ./build.sh
+CMD /geoip/build.sh
