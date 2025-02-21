@@ -25,12 +25,6 @@ RUN go mod download
 
 RUN go build -o geoip
 
-RUN mkdir -p /geoip/output/text/
-
 CMD ["./geoip", "-c", "config-preparing.json"]
-
-COPY /geoip/output/text/ /geoip/changes/
-
-RUN rm -rf /geoip/output/text/*
 
 CMD ["./geoip", "-c", "config-finalise.json"]
