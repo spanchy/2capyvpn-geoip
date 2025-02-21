@@ -5,7 +5,7 @@
       "action": "add", 
       "args": {
         "name": "direct",
-        "uri": "./output/text/ru.txt"
+        "uri": "./changes/ru.txt"
       }
     },
     {
@@ -13,7 +13,7 @@
       "action": "add", 
       "args": {
         "name": "direct",
-        "uri": "./output/text/by.txt"
+        "uri": "./changes/by.txt"
       }
     },
     {
@@ -21,7 +21,7 @@
       "action": "add", 
       "args": {
         "name": "direct",
-        "uri": "./output/text/kz.txt"
+        "uri": "./changes/kz.txt"
       }
     },
     {
@@ -29,7 +29,7 @@
       "action": "add", 
       "args": {
         "name": "direct",
-        "uri": "./output/text/private.txt"
+        "uri": "./changes/private.txt"
       }
     },
     {

@@ -29,4 +29,6 @@ RUN go build -o geoip
 
 CMD ["./geoip", "-c", "config-preparing.json"]
 
+COPY output/text/ /geoip/changes/
+
 CMD ["./geoip", "-c", "config-finalise.json"]

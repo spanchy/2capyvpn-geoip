@@ -48,6 +48,7 @@ jobs:
       - name: Run Docker container
         run: |
           mkdir -p output/dat
+          mkdir -p output/text
           docker run --rm -v ${{ github.workspace }}/output:/geoip/output geoip-generator
 
       - name: Move files to publish directory
