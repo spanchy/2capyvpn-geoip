@@ -5,7 +5,7 @@
       "action": "add", 
       "args": {
         "name": "direct",
-        "uri": "/geoip/output/text/ru.txt"
+        "uri": "./output/text/ru.txt"
       }
     },
     {
@@ -13,7 +13,7 @@
       "action": "add", 
       "args": {
         "name": "direct",
-        "uri": "/geoip/output/text/by.txt"
+        "uri": "./output/text/by.txt"
       }
     },
     {
@@ -21,7 +21,7 @@
       "action": "add", 
       "args": {
         "name": "direct",
-        "uri": "/geoip/output/text/kz.txt"
+        "uri": "./output/text/kz.txt"
       }
     },
     {
@@ -29,7 +29,7 @@
       "action": "add", 
       "args": {
         "name": "direct",
-        "uri": "/geoip/output/text/private.txt"
+        "uri": "./output/text/private.txt"
       }
     },
     {
