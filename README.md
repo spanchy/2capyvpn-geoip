@@ -9,10 +9,12 @@
 - **Threema** (добавлять в proxy, ибо заблокирован в РФ) - добавлена новая категория "threema"
 
 #### Удалено:
-- Все остальные гео-категории, отличные от: "ru", "by", "kz", "discord", "threema", "private", "test".
+- Все остальные гео-категории, отличные от: "ru", "by", "kz", "discord", "threema", "private".
 
-## 📥 **Скачать последнюю версию**  
-[**geoip.dat (cтатическая ссылка)**](https://github.com/hydraponique/roscomvpn-geoip/releases/latest/download/geoip.dat)
+## 📥 **Статические ссылки на latest версию**  
+https://github.com/hydraponique/roscomvpn-geoip/releases/latest/download/geoip.dat
+
+https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip@release/geoip.dat
 
 ## 📅 Обновления
 Файл **обновляется каждый четверг** и **при внесении любого изменения в данный репозиторий**
@@ -28,7 +30,6 @@
         "type": "field",
         "ip": [
           "geoip:private",
-          "geoip:test",
           "geoip:ru",
           "geoip:by",
           "geoip:kz"
