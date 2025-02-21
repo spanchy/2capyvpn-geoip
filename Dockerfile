@@ -4,7 +4,9 @@ RUN apk add --no-cache git curl unzip
 
 RUN git clone https://github.com/v2fly/geoip.git /geoip
 
-COPY config.json /geoip/config.json
+COPY config-preparing.json /geoip/config-preparing.json
+
+COPY config-finalise.json /geoip/config-finalise.json
 
 RUN mkdir -p /geoip/changes
 
