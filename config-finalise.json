@@ -52,14 +52,6 @@
       "type": "text",
       "action": "add", 
       "args": {
-        "name": "block",
-        "uri": "./changes/block.txt"
-      }
-    },
-    {
-      "type": "text",
-      "action": "add", 
-      "args": {
         "name": "proxy",
         "uri": "https://raw.githubusercontent.com/fatyzzz/ipset-discord/refs/heads/main/discord.txt"
       }
