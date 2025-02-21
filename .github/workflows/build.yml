@@ -55,7 +55,8 @@ jobs:
         run: |
           mkdir publish
           cp output/dat/*.dat publish
-          cp output/text/*.txt publish
+          cp output/text/direct.txt publish
+          cp output/text/proxy.txt publish
 
       - name: Publish release
         uses: softprops/action-gh-release@v1
