@@ -10,10 +10,10 @@ on:
       - "README.md"
 
 jobs:
-  new-tag:
+  build:
+    name: Build
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
