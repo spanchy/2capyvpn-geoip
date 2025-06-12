@@ -55,6 +55,14 @@
                 "name": "discord",
                 "uri": "https://raw.githubusercontent.com/fatyzzz/ipset-discord/refs/heads/main/discord.txt"
             }
+        },
+        {
+            "type": "text",
+            "action": "add",
+            "args": {
+                "name": "ban-ru",
+                "uri": "https://raw.githubusercontent.com/1andrevich/Re-filter-lists/refs/heads/main/ipsum.lst"
+            }
         }
     ],
     "output": [
