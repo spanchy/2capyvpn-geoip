@@ -60,8 +60,6 @@ jobs:
         run: |
           mkdir publish
           cp output/dat/*.dat publish
-          cp output/text/direct.txt publish
-          cp output/text/threema.txt publish
           
       - name: Git push assets to "release" branch
         run: |
