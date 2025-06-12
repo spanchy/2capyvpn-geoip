@@ -1,4 +1,4 @@
-# 🌎 RoscomVPN GeoIP
+# 🌎 2CapyVPN GeoIP File
 
 ### Генерирует самую актуальную базу данных **российских, белорусских и казахстанских IP-адресов** в формате `geoip.dat`, предназначенную для использования в **Xray-core** и **V2Ray-core**.
 
@@ -12,12 +12,9 @@
 - Все остальные гео-категории, отличные от: "ru", "by", "kz", "discord", "threema", "private".
 
 ## 📥 **Статические ссылки на latest версию**  
-https://github.com/hydraponique/roscomvpn-geoip/releases/latest/download/geoip.dat
+https://github.com/spanchy/2capyvpn-geoip/releases/latest/download/geoip.dat
 
-https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip@release/geoip.dat
-
-## 📅 Обновления
-Файл **обновляется каждый четверг** и **при внесении любого изменения в данный репозиторий**
+https://cdn.jsdelivr.net/gh/spanchy/2capyvpn-geoip@release/geoip.dat
 
 ## 🛠 Использование с Xray/V2Ray
 Добавьте правило в конфигурацию Xray/V2Ray, чтобы **направлять нужный трафик через определённый прокси или напрямую**:
@@ -48,3 +45,5 @@ https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip@release/geoip.dat
   }
 }
 ```
+
+Спасибо @hydraponique.
