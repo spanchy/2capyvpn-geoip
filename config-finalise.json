@@ -1,89 +1,81 @@
 {
-  "input": [
-    {
-      "type": "text",
-      "action": "add", 
-      "args": {
-        "name": "direct",
-        "uri": "./output/text/ru.txt"
-      }
-    },
-    {
-      "type": "text",
-      "action": "add", 
-      "args": {
-        "name": "direct",
-        "uri": "./output/text/by.txt"
-      }
-    },
-    {
-      "type": "text",
-      "action": "add", 
-      "args": {
-        "name": "direct",
-        "uri": "./output/text/kz.txt"
-      }
-    },
-    {
-      "type": "text",
-      "action": "add", 
-      "args": {
-        "name": "direct",
-        "uri": "./output/text/private.txt"
-      }
-    },
-    {
-      "type": "text",
-      "action": "add", 
-      "args": {
-        "name": "direct",
-        "uri": "./changes/direct.txt"
-      }
-    },
-    {
-      "type": "text",
-      "action": "add", 
-      "args": {
-        "name": "proxy",
-        "uri": "./changes/proxy.txt"
-      }
-    },
-    {
-      "type": "text",
-      "action": "add", 
-      "args": {
-        "name": "threema",
-        "uri": "./changes/threema.txt"
-      }
-    },
-    {
-      "type": "text",
-      "action": "add", 
-      "args": {
-        "name": "custom",
-        "uri": "./changes/custom.txt"
-      }
-    },
-    {
-      "type": "text",
-      "action": "add", 
-      "args": {
-        "name": "discord",
-        "uri": "https://raw.githubusercontent.com/fatyzzz/ipset-discord/refs/heads/main/discord.txt"
-      }
-    }
-  ],
-  "output": [
-    {
-      "type": "v2rayGeoIPDat",
-      "action": "output",
-      "args": {
-        "outputName": "geoip.dat"
-      }
-    },
-    {
-      "type": "text",
-      "action": "output"
-    }
-  ]
+    "input": [
+        {
+            "type": "text",
+            "action": "add",
+            "args": {
+                "name": "direct",
+                "uri": "./output/text/ru.txt"
+            }
+        },
+        {
+            "type": "text",
+            "action": "add",
+            "args": {
+                "name": "direct",
+                "uri": "./output/text/by.txt"
+            }
+        },
+        {
+            "type": "text",
+            "action": "add",
+            "args": {
+                "name": "direct",
+                "uri": "./output/text/kz.txt"
+            }
+        },
+        {
+            "type": "text",
+            "action": "add",
+            "args": {
+                "name": "direct",
+                "uri": "./output/text/private.txt"
+            }
+        },
+        {
+            "type": "text",
+            "action": "add",
+            "args": {
+                "name": "direct",
+                "uri": "./changes/direct.txt"
+            }
+        },
+        {
+            "type": "text",
+            "action": "add",
+            "args": {
+                "name": "threema",
+                "uri": "./changes/threema.txt"
+            }
+        },
+        {
+            "type": "text",
+            "action": "add",
+            "args": {
+                "name": "custom",
+                "uri": "./changes/custom.txt"
+            }
+        },
+        {
+            "type": "text",
+            "action": "add",
+            "args": {
+                "name": "discord",
+                "uri": "https://raw.githubusercontent.com/fatyzzz/ipset-discord/refs/heads/main/discord.txt"
+            }
+        }
+    ],
+    "output": [
+        {
+            "type": "v2rayGeoIPDat",
+            "action": "output",
+            "args": {
+                "outputName": "geoip.dat"
+            }
+        },
+        {
+            "type": "text",
+            "action": "output"
+        }
+    ]
 }
