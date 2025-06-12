@@ -52,14 +52,6 @@
             "type": "text",
             "action": "add",
             "args": {
-                "name": "custom",
-                "uri": "./changes/custom.txt"
-            }
-        },
-        {
-            "type": "text",
-            "action": "add",
-            "args": {
                 "name": "discord",
                 "uri": "https://raw.githubusercontent.com/fatyzzz/ipset-discord/refs/heads/main/discord.txt"
             }
