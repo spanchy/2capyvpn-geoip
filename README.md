@@ -49,4 +49,4 @@ https://cdn.jsdelivr.net/gh/spanchy/2capyvpn-geoip@release/geoip.dat
 }
 ```
 
-Спасибо @hydraponique.
+Спасибо [@hydraponique](https://github.com/hydraponique/).
