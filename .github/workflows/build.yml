@@ -7,7 +7,7 @@ on:
     branches:
       - master
     paths:
-      - "/changes/**"
+      - "changes/**"
       - "config-finalise.json"
       - "config-preparing.json"
       - "Dockerfile"
