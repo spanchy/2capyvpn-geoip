@@ -13,7 +13,7 @@
 #### Удалено:
 - Все остальные гео-категории, отличные от: "ru", "by", "kz", "discord", "threema", "private", "ban-ru", "custom"
 
-## 📥 **Статические ссылки на latest версию**  
+## 📥 **Статические ссылки на актуальную версию**  
 https://github.com/spanchy/2capyvpn-geoip/releases/latest/download/geoip.dat
 
 https://cdn.jsdelivr.net/gh/spanchy/2capyvpn-geoip@release/geoip.dat
