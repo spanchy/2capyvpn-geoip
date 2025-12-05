@@ -6,11 +6,11 @@ on:
   push:
     branches:
       - master
-    paths:
-      - "changes/**"
-      - "config-finalise.json"
-      - "config-preparing.json"
-      - "Dockerfile"
+    #paths:
+    #  - "changes/**"
+    #  - "config-finalise.json"
+    #  - "config-preparing.json"
+    #  - "Dockerfile"
     #paths-ignore:
     #  - "README.md"
 
