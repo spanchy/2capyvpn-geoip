@@ -6,13 +6,8 @@ on:
   push:
     branches:
       - master
-    #paths:
-    #  - "changes/**"
-    #  - "config-finalise.json"
-    #  - "config-preparing.json"
-    #  - "Dockerfile"
-    #paths-ignore:
-    #  - "README.md"
+    paths-ignore:
+      - "README.md"
 
 jobs:
   build:
