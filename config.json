@@ -68,6 +68,33 @@
                 "name": "discord",
                 "uri": "https://raw.githubusercontent.com/GhostRooter0953/discord-voice-ips/refs/heads/master/voice_domains/discord-voice-ip-list"
             }
+<<<<<<< HEAD:config.json
+=======
+        },
+        {
+            "type": "text",
+            "action": "add",
+            "args": {
+                "name": "ban-ru",
+                "uri": "https://raw.githubusercontent.com/1andrevich/Re-filter-lists/refs/heads/main/ipsum.lst"
+            }
+        },
+        {
+            "type": "text",
+            "action": "add",
+            "args": {
+                "name": "ban-ru",
+                "uri": "https://antifilter.network/download/ipsum.lst"
+            }
+        },
+        {
+            "type": "text",
+            "action": "add",
+            "args": {
+                "name": "ban-ru",
+                "uri": "https://antifilter.network/download/subnet.lst"
+            }
+>>>>>>> master:config-finalise.json
         }
     ],
     "output": [
