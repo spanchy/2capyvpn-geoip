@@ -120,6 +120,7 @@ jobs:
             if [ -f "$f" ]; then
               cp "$f" ./tmp
             fi
+          done
 
           ./geoip -c config.json
           ls -l output/dat/*.dat
