@@ -100,10 +100,7 @@ jobs:
         run: |
           set -euo pipefail
           rm -rf tmp output
-          mkdir -p tmp/text tmp/custom output/dat output/text
-          cp ./changes/custom.txt ./tmp/custom/
-          cp ./changes/roblox.txt ./tmp/custom/
-          cp ./changes/threema.txt ./tmp/custom/
+          mkdir -p tmp/text output/dat output/text
           rm -f ./tmp/text/prepare.txt
           : > ./tmp/text/prepare.txt
 
