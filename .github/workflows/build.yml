@@ -101,6 +101,9 @@ jobs:
           set -euo pipefail
           rm -rf tmp output
           mkdir -p tmp/text tmp/custom output/dat output/text
+          cp ./changes/custom.txt ./tmp/custom/
+          cp ./changes/roblox.txt ./tmp/custom/
+          cp ./changes/threema.txt ./tmp/custom/
           rm -f ./tmp/text/prepare.txt
           : > ./tmp/text/prepare.txt
 
@@ -115,12 +118,6 @@ jobs:
             --A ./tmp/text/prepare.txt \
             --B ./refilter.txt,./antifilternetwork.txt,./antifilterdownloadcommunity.txt,./refiltercommunity.txt,./antifilternetworkcommunity.txt,./cdn.lst,./merged.sum,./changes/list-del.txt \
             --out ./tmp/text/final.txt
-
-          for f in ./changes/custom.txt ./changes/roblox.txt ./changes/threema.txt; do
-            if [ -f "$f" ]; then
-              cp "$f" ./tmp/custom/
-            fi
-          done
 
           ./geoip -c config.json
           ls -l output/dat/*.dat
