@@ -100,7 +100,7 @@ jobs:
         run: |
           set -euo pipefail
           rm -rf tmp output
-          mkdir -p tmp/text output/dat output/text
+          mkdir -p tmp/text tmp/custom output/dat output/text
           rm -f ./tmp/text/prepare.txt
           : > ./tmp/text/prepare.txt
 
@@ -118,7 +118,7 @@ jobs:
 
           for f in ./changes/custom.txt ./changes/roblox.txt ./changes/threema.txt; do
             if [ -f "$f" ]; then
-              cp "$f" ./tmp
+              cp "$f" ./tmp/custom/
             fi
           done
 
