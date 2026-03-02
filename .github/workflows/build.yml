@@ -116,6 +116,11 @@ jobs:
             --B ./refilter.txt,./antifilternetwork.txt,./antifilterdownloadcommunity.txt,./refiltercommunity.txt,./antifilternetworkcommunity.txt,./cdn.lst,./merged.sum,./changes/list-del.txt \
             --out ./tmp/text/final.txt
 
+          for f in ./changes/custom.txt ./changes/roblox.txt ./changes/threema.txt; do
+            if [ -f "$f" ]; then
+              cp "$f" ./tmp
+            fi
+
           ./geoip -c config.json
           ls -l output/dat/*.dat
 
