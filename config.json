@@ -25,14 +25,6 @@
             "type": "text",
             "action": "add",
             "args": {
-                "name": "direct",
-                "uri": "./changes/direct.txt"
-            }
-        },
-        {
-            "type": "text",
-            "action": "add",
-            "args": {
                 "name": "threema",
                 "uri": "./changes/threema.txt"
             }
@@ -68,8 +60,6 @@
                 "name": "discord",
                 "uri": "https://raw.githubusercontent.com/GhostRooter0953/discord-voice-ips/refs/heads/master/voice_domains/discord-voice-ip-list"
             }
-<<<<<<< HEAD:config.json
-=======
         },
         {
             "type": "text",
@@ -94,7 +84,6 @@
                 "name": "ban-ru",
                 "uri": "https://antifilter.network/download/subnet.lst"
             }
->>>>>>> master:config-finalise.json
         }
     ],
     "output": [
