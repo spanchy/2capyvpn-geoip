@@ -5,31 +5,20 @@
             "action": "add",
             "args": {
                 "name": "direct",
-                "uri": "./output/text/ru.txt"
+                "uri": "./tmp/text/final.txt",
+                "onlyIPType": "ipv4"
             }
         },
         {
-            "type": "text",
-            "action": "add",
-            "args": {
-                "name": "direct",
-                "uri": "./output/text/by.txt"
-            }
+            "type": "private",
+            "action": "add"
         },
         {
             "type": "text",
-            "action": "add",
+            "action": "remove",
             "args": {
-                "name": "direct",
-                "uri": "./output/text/kz.txt"
-            }
-        },
-        {
-            "type": "text",
-            "action": "add",
-            "args": {
-                "name": "direct",
-                "uri": "./output/text/private.txt"
+                "name": "private",
+                "ipOrCIDR": ["0.0.0.0/8", "::/128"]
             }
         },
         {
@@ -78,14 +67,6 @@
             "args": {
                 "name": "discord",
                 "uri": "https://raw.githubusercontent.com/GhostRooter0953/discord-voice-ips/refs/heads/master/voice_domains/discord-voice-ip-list"
-            }
-        },
-        {
-            "type": "text",
-            "action": "add",
-            "args": {
-                "name": "ban-ru",
-                "uri": "https://raw.githubusercontent.com/1andrevich/Re-filter-lists/refs/heads/main/ipsum.lst"
             }
         }
     ],
