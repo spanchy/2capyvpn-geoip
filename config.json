@@ -26,7 +26,7 @@
             "action": "add",
             "args": {
                 "name": "threema",
-                "uri": "./changes/threema.txt"
+                "uri": "./tmp/threema.txt"
             }
         },
         {
@@ -34,7 +34,7 @@
             "action": "add",
             "args": {
                 "name": "roblox",
-                "uri": "./changes/roblox.txt"
+                "uri": "./tmp/roblox.txt"
             }
         },
         {
@@ -42,7 +42,7 @@
             "action": "add",
             "args": {
                 "name": "custom",
-                "uri": "./changes/custom.txt"
+                "uri": "./tmp/custom.txt"
             }
         },
         {
