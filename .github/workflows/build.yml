@@ -1,4 +1,4 @@
-name: Build geoip.dat
+name: Build geoip
 on:
   workflow_dispatch:
   schedule:
@@ -8,6 +8,12 @@ on:
       - master
     paths-ignore:
       - "README.md"
+      - ".gitignore"
+      - "LICENSE"
+      - "release/**"
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -15,71 +21,192 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout codebase
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Checkout v2fly/geoip
+        uses: actions/checkout@v6
+        with:
+          repository: v2fly/geoip
+          path: geoip
+          fetch-depth: 1
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: geoip/go.mod
+          cache: true
+          cache-dependency-path: geoip/go.sum
+
+      - name: Overlay custom files over geoip
+        run: |
+          set -euo pipefail
+          cp -f ./*.json geoip/ 2>/dev/null || true
+          cp -f ./*.txt  geoip/ 2>/dev/null || true
+          cp -f ./*.py   geoip/ 2>/dev/null || true
 
       - name: Set tag
+        if: github.ref_name == 'master'
         run: |
+          set -euo pipefail
           DAILY_TAG=$(date +%Y%m%d%H%M)
-          echo "DAILY_TAG=$DAILY_TAG" >> $GITHUB_ENV
+          echo "DAILY_TAG=$DAILY_TAG" >> "$GITHUB_ENV"
 
       - name: Create Tag
-        uses: actions/github-script@v7
+        if: github.ref_name == 'master'
+        uses: actions/github-script@v8
         with:
           script: |
-            const {DAILY_TAG} = process.env
-            github.rest.git.createRef({
+            const { DAILY_TAG } = process.env
+            await github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: `refs/tags/${DAILY_TAG}`,
               sha: context.sha
             })
 
-      - name: Download MaxMind GeoLite2
+      - name: Download inputs (IP lists + Geobases)
+        working-directory: geoip
         run: |
-          curl -L "https://dl.netsyms.net/dbs/geolite2/GeoLite2-Country-CSV.zip" -o GeoLite2-Country-CSV.zip
+          set -euo pipefail
+          CURL="curl -fsSL --retry 3 --retry-delay 2 --retry-connrefused"
 
-      - name: Build Docker image
-        run: docker build -t geoip-generator .
+          $CURL -o antifilterdownloadcommunity.txt https://community.antifilter.download/list/community.lst
+          $CURL -o refilter.txt https://raw.githubusercontent.com/1andrevich/Re-filter-lists/refs/heads/main/ipsum.lst
+          $CURL -o refiltercommunity.txt https://raw.githubusercontent.com/1andrevich/Re-filter-lists/refs/heads/main/community_ips.lst
+          $CURL -o antifilternetwork.txt https://antifilter.network/download/ip.lst
+          $CURL -o antifilternetworkcommunity.txt https://antifilter.network/downloads/custom.lst
+          $CURL -o cdn.lst https://raw.githubusercontent.com/mansourjabin/cdn-ip-database/refs/heads/main/data/cdn.lst
+          $CURL -o merged.sum https://raw.githubusercontent.com/PentiumB/CDN-RuleSet/refs/heads/main/release/merged.sum
 
-      - name: Run Docker container
+          $CURL -o geolite_ru.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/geolite2-geo-whois-asn-country-ipv4/ru.lst
+          $CURL -o geolite_by.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/geolite2-geo-whois-asn-country-ipv4/by.lst
+          $CURL -o ipinfo_ru.lst https://raw.githubusercontent.com/Davoyan/ipinfo/refs/heads/main/geo/geoip/ru.lst
+          $CURL -o ipinfo_by.lst https://raw.githubusercontent.com/Davoyan/ipinfo/refs/heads/main/geo/geoip/by.lst
+          $CURL -o dbip_ru.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/dbip-country-ipv4/ru.lst
+          $CURL -o dbip_by.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/dbip-country-ipv4/by.lst
+
+      - name: Build geoip tool
+        working-directory: geoip
         run: |
-          mkdir -p output/dat
-          mkdir -p output/text
-          docker run --rm -v ${{ github.workspace }}/output:/geoip/output geoip-generator
+          set -euo pipefail
+          go mod download
+          go build -o geoip
 
-      - name: Move files to publish directory
+      - name: Generate geoip artifacts
+        working-directory: geoip
         run: |
-          mkdir publish
-          cp output/dat/*.dat publish
-          
+          set -euo pipefail
+          rm -rf tmp output
+          mkdir -p tmp/text output/dat output/text
+          rm -f ./tmp/text/prepare.txt
+          : > ./tmp/text/prepare.txt
+
+          for f in ./geolite_ru.lst ./geolite_by.lst ./ipinfo_ru.lst ./ipinfo_by.lst ./dbip_ru.lst ./dbip_by.lst ./changes/custom.txt ./changes/direct.txt ./changes/roblox.txt ./changes/threema.txt; do
+            if [ -f "$f" ]; then
+              cat "$f" >> ./tmp/text/prepare.txt
+              printf '\n' >> ./tmp/text/prepare.txt
+            fi
+          done
+
+          python3 ipset_ops.py --mode diff \
+            --A ./tmp/text/prepare.txt \
+            --B ./refilter.txt,./antifilternetwork.txt,./antifilterdownloadcommunity.txt,./refiltercommunity.txt,./antifilternetworkcommunity.txt,./cdn.lst,./merged.sum,./changes/list-del.txt \
+            --out ./tmp/text/final.txt
+
+          ./geoip -c config.json
+          ls -l output/dat/*.dat
+
+      - name: Prepare workdir (copy ALL text files + clean with awk)
+        run: |
+          set -euo pipefail
+
+          work=/tmp/geoip-text
+          rm -rf "$work"
+          mkdir -p "$work"
+
+          shopt -s nullglob
+          cp -f geoip/output/text/*.txt "$work"/
+          shopt -u nullglob
+
+          for f in "$work"/*.txt; do
+            tmp="$(mktemp)"
+            awk '
+              function trim(s){ sub(/^[ \t]+/,"",s); sub(/[ \t]+$/,"",s); return s }
+              {
+                gsub(/\r/,"")
+                s=$0
+
+                sub(/[ \t]*#.*/,  "", s)
+                sub(/[ \t]*\/\/.*/, "", s)
+                sub(/[ \t]*@.*/,  "", s)
+
+                s=trim(s)
+                if (s=="") next
+                print s
+              }
+            ' "$f" > "$tmp"
+            mv "$tmp" "$f"
+          done
+
+      - name: Prepare release directory and archives
+        if: github.ref_name == 'master'
+        run: |
+          set -euo pipefail
+          rm -rf release
+          rm -rf /tmp/release
+          mkdir -p release/text
+          cp geoip/output/dat/*.dat release/
+          cp -f /tmp/geoip-text/*.txt release/text/
+          rm -f /tmp/text.tar.gz
+          tar -czf /tmp/text.tar.gz -C release text
+          test -s /tmp/text.tar.gz
+          sha256sum release/geoip.dat > release/geoip.dat.sha256
+          cp -r release /tmp/release
+
       - name: Git push assets to "release" branch
+        if: github.ref_name == 'master'
         run: |
-          cd publish || exit 1
+          cd release || exit 1
           git init
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "spanchy"
+          git config --local user.email "spanchy@users.noreply.github.com"
           git checkout -b release
           git add -A
-          git commit -m "${{ env.DAILY_TAG }}"
+          git commit -m "Release ${{ env.DAILY_TAG }}"
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u origin release
+          cd .. || exit 1
+          git config --local user.name "spanchy"
+          git config --local user.email "spanchy@users.noreply.github.com"
+          git checkout master
+          rm -rf release
+          cp -r /tmp/release ./release
+          git add release/
+          git commit -m "Release ${{ env.DAILY_TAG }}" || echo "No changes to commit"
+          git push origin master
           
       - name: Purge jsdelivr CDN
+        if: github.ref_name == 'master'
         run: |
-          cd publish || exit 1
-          for file in $(ls); do
-            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@release/${file}"
+          set -euo pipefail
+          cd release || exit 1
+          find . -type f -print0 | while IFS= read -r -d '' f; do
+            rel="${f#./}"
+            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@${{ env.DAILY_TAG }}/release/${rel}"
           done
 
       - name: Publish release
+        if: github.ref_name == 'master'
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ env.DAILY_TAG }}
           name: ${{ env.DAILY_TAG }}
           prerelease: false
           draft: false
-          files: "publish/*"
+          files: |
+            release/*.dat
+            release/*.dat.sha256
+            /tmp/text.tar.gz
