@@ -77,7 +77,6 @@ jobs:
           $CURL -o refilter.txt https://raw.githubusercontent.com/1andrevich/Re-filter-lists/refs/heads/main/ipsum.lst
           $CURL -o refiltercommunity.txt https://raw.githubusercontent.com/1andrevich/Re-filter-lists/refs/heads/main/community_ips.lst
           $CURL -o antifilternetwork.txt https://antifilter.network/download/ip.lst
-          $CURL -o antifilternetworkcommunity.txt https://antifilter.network/downloads/custom.lst
           $CURL -o cdn.lst https://raw.githubusercontent.com/mansourjabin/cdn-ip-database/refs/heads/main/data/cdn.lst
           $CURL -o merged.sum https://raw.githubusercontent.com/PentiumB/CDN-RuleSet/refs/heads/main/release/merged.sum
 
@@ -113,7 +112,7 @@ jobs:
 
           python3 ipset_ops.py --mode diff \
             --A ./tmp/text/prepare.txt \
-            --B ./refilter.txt,./antifilternetwork.txt,./antifilterdownloadcommunity.txt,./refiltercommunity.txt,./antifilternetworkcommunity.txt,./cdn.lst,./merged.sum,./list-del.txt \
+            --B ./refilter.txt,./antifilternetwork.txt,./antifilterdownloadcommunity.txt,./refiltercommunity.txt,./cdn.lst,./merged.sum,./list-del.txt \
             --out ./tmp/text/final.txt
 
           ./geoip -c config.json
