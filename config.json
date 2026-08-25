@@ -10,15 +10,6 @@
             }
         },
         {
-            "type": "text",
-            "action": "add",
-            "args": {
-                "name": "whitelist",
-                "uri": "./tmp/text/whitelist.txt",
-                "onlyIPType": "ipv4"
-            }
-        },
-        {
             "type": "private",
             "action": "add"
         },
@@ -52,6 +43,14 @@
             "args": {
                 "name": "custom",
                 "uri": "./custom.txt"
+            }
+        },
+        {
+            "type": "text",
+            "action": "add",
+            "args": {
+                "name": "whitelist",
+                "uri": "https://raw.githubusercontent.com/Noktomezo/RussiaFancyLists/main/lists/whitelist/cidr.lst"
             }
         },
         {
