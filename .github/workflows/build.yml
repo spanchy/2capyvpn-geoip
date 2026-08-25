@@ -77,7 +77,6 @@ jobs:
           $CURL -o refilter.txt https://raw.githubusercontent.com/1andrevich/Re-filter-lists/refs/heads/main/ipsum.lst
           $CURL -o refiltercommunity.txt https://raw.githubusercontent.com/1andrevich/Re-filter-lists/refs/heads/main/community_ips.lst
           $CURL -o antifilternetwork.txt https://antifilter.network/download/ip.lst
-          $CURL -o antifilternetworkcommunity.txt https://antifilter.network/downloads/custom.lst
           $CURL -o cdn.lst https://raw.githubusercontent.com/mansourjabin/cdn-ip-database/refs/heads/main/data/cdn.lst
           $CURL -o merged.sum https://raw.githubusercontent.com/PentiumB/CDN-RuleSet/refs/heads/main/release/merged.sum
 
@@ -87,6 +86,7 @@ jobs:
           $CURL -o ipinfo_by.lst https://raw.githubusercontent.com/Davoyan/ipinfo/refs/heads/main/geo/geoip/by.lst
           $CURL -o dbip_ru.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/dbip-country-ipv4/ru.lst
           $CURL -o dbip_by.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/dbip-country-ipv4/by.lst
+          $CURL -o whitelist_cidr.lst https://raw.githubusercontent.com/Noktomezo/RussiaFancyLists/main/lists/whitelist/cidr.lst
 
       - name: Build geoip tool
         working-directory: geoip
@@ -111,9 +111,14 @@ jobs:
             fi
           done
 
+          if [ -f ./whitelist_cidr.lst ]; then
+            cat ./whitelist_cidr.lst >> ./tmp/text/whitelist.txt
+            printf '\n' >> ./tmp/text/whitelist.txt
+          fi
+          
           python3 ipset_ops.py --mode diff \
             --A ./tmp/text/prepare.txt \
-            --B ./refilter.txt,./antifilternetwork.txt,./antifilterdownloadcommunity.txt,./refiltercommunity.txt,./antifilternetworkcommunity.txt,./cdn.lst,./merged.sum,./list-del.txt \
+            --B ./refilter.txt,./antifilternetwork.txt,./antifilterdownloadcommunity.txt,./refiltercommunity.txt,./cdn.lst,./merged.sum,./list-del.txt \
             --out ./tmp/text/final.txt
 
           ./geoip -c config.json
