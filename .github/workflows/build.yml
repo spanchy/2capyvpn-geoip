@@ -86,8 +86,7 @@ jobs:
           $CURL -o ipinfo_by.lst https://raw.githubusercontent.com/Davoyan/ipinfo/refs/heads/main/geo/geoip/by.lst
           $CURL -o dbip_ru.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/dbip-country-ipv4/ru.lst
           $CURL -o dbip_by.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/dbip-country-ipv4/by.lst
-          $CURL -o whitelist_cidr.lst https://raw.githubusercontent.com/Noktomezo/RussiaFancyLists/main/lists/whitelist/cidr.lst
-
+          
       - name: Build geoip tool
         working-directory: geoip
         run: |
@@ -110,11 +109,6 @@ jobs:
               printf '\n' >> ./tmp/text/prepare.txt
             fi
           done
-
-          if [ -f ./whitelist_cidr.lst ]; then
-            cat ./whitelist_cidr.lst >> ./tmp/text/whitelist.txt
-            printf '\n' >> ./tmp/text/whitelist.txt
-          fi
           
           python3 ipset_ops.py --mode diff \
             --A ./tmp/text/prepare.txt \
