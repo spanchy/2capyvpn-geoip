@@ -74,23 +74,7 @@
             "action": "add",
             "args": {
                 "name": "ban-ru",
-                "uri": "https://raw.githubusercontent.com/1andrevich/Re-filter-lists/refs/heads/main/ipsum.lst"
-            }
-        },
-        {
-            "type": "text",
-            "action": "add",
-            "args": {
-                "name": "ban-ru",
-                "uri": "https://antifilter.network/download/ipsum.lst"
-            }
-        },
-        {
-            "type": "text",
-            "action": "add",
-            "args": {
-                "name": "ban-ru",
-                "uri": "https://antifilter.network/download/subnet.lst"
+                "uri": "https://antifilter.download/list/allyouneed.lst"
             }
         }
     ],
