@@ -152,12 +152,12 @@ def write_fingerprint(script_path: str, out_path: str):
 
 def main():
     ap = argparse.ArgumentParser(description="Generic IP set operations")
-    ap.add_argument("--mode", choices=["intersect", "diff"], required=True)
+    ap.add_argument("--mode", choices=["union", "intersect", "diff"], required=True)
     ap.add_argument(
         "--set",
         action="append",
         default=[],
-        help="group for intersection; comma-separated files per group",
+        help="input group; comma-separated files per group",
     )
     ap.add_argument(
         "--A", default="", help="minuend group for diff; comma-separated files"
@@ -169,7 +169,13 @@ def main():
     ap.add_argument("--fingerprint-out", default="")
     args = ap.parse_args()
 
-    if args.mode == "intersect":
+    if args.mode == "union":
+        if not args.set:
+            raise SystemExit("union requires at least one --set group")
+        groups = [read_group(s) for s in args.set]
+        res = normalize([net for group in groups for net in group])
+        write_list(args.out, res)
+    elif args.mode == "intersect":
         if len(args.set) < 2:
             raise SystemExit("intersect requires at least two --set groups")
         groups = [read_group(s) for s in args.set]

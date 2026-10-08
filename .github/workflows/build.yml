@@ -22,19 +22,19 @@ jobs:
 
     steps:
       - name: Checkout codebase
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 
       - name: Checkout v2fly/geoip
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: v2fly/geoip
           path: geoip
           fetch-depth: 1
 
       - name: Set up Go
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v7
         with:
           go-version-file: geoip/go.mod
           cache: true
@@ -56,7 +56,7 @@ jobs:
 
       - name: Create Tag
         if: github.ref_name == 'master'
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const { DAILY_TAG } = process.env
@@ -73,12 +73,18 @@ jobs:
           set -euo pipefail
           CURL="curl -fsSL --retry 3 --retry-delay 2 --retry-connrefused"
 
-          $CURL -o antifilterdownloadcommunity.txt https://community.antifilter.download/list/community.lst
-          $CURL -o refilter.txt https://raw.githubusercontent.com/1andrevich/Re-filter-lists/refs/heads/main/ipsum.lst
-          $CURL -o refiltercommunity.txt https://raw.githubusercontent.com/1andrevich/Re-filter-lists/refs/heads/main/community_ips.lst
-          $CURL -o antifilternetwork.txt https://antifilter.network/download/ip.lst
-          $CURL -o cdn.lst https://raw.githubusercontent.com/mansourjabin/cdn-ip-database/refs/heads/main/data/cdn.lst
-          $CURL -o merged.sum https://raw.githubusercontent.com/PentiumB/CDN-RuleSet/refs/heads/main/release/merged.sum
+          $CURL -o russiafancy-full.lst https://raw.githubusercontent.com/Noktomezo/RussiaFancyLists/main/lists/blacklist/ipsets/full.lst
+          $CURL -o antifilter-allyouneed.lst https://antifilter.download/list/allyouneed.lst
+          $CURL -o russiafancy-cdn.lst https://raw.githubusercontent.com/Noktomezo/RussiaFancyLists/main/lists/blacklist/ipsets/cdn.lst
+          $CURL -o discord-ipset.txt https://raw.githubusercontent.com/fatyzzz/ipset-discord/refs/heads/main/discord.txt
+          $CURL -o discord-voice.txt https://raw.githubusercontent.com/GhostRooter0953/discord-voice-ips/refs/heads/master/voice_domains/discord-voice-ip-list
+          $CURL -o whitelist-source.lst https://raw.githubusercontent.com/Noktomezo/RussiaFancyLists/main/lists/whitelist/cidr.lst
+          test -s russiafancy-full.lst
+          test -s antifilter-allyouneed.lst
+          test -s russiafancy-cdn.lst
+          test -s discord-ipset.txt
+          test -s discord-voice.txt
+          test -s whitelist-source.lst
 
           $CURL -o geolite_ru.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/geolite2-geo-whois-asn-country-ipv4/ru.lst
           $CURL -o geolite_by.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/geolite2-geo-whois-asn-country-ipv4/by.lst
@@ -91,7 +97,6 @@ jobs:
         working-directory: geoip
         run: |
           set -euo pipefail
-          go mod download
           go build -o geoip
 
       - name: Generate geoip artifacts
@@ -103,6 +108,17 @@ jobs:
           rm -f ./tmp/text/prepare.txt
           : > ./tmp/text/prepare.txt
 
+          python3 ipset_ops.py --mode union \
+            --set ./russiafancy-full.lst,./antifilter-allyouneed.lst,./threema.txt,./custom.txt,./discord-ipset.txt,./discord-voice.txt \
+            --out ./ban-ru.txt
+          python3 ipset_ops.py --mode union \
+            --set ./russiafancy-cdn.lst \
+            --out ./cdn.txt
+          python3 ipset_ops.py --mode diff \
+            --A ./whitelist-source.lst \
+            --B ./ban-ru.txt \
+            --out ./whitelist.txt
+
           for f in ./geolite_ru.lst ./geolite_by.lst ./ipinfo_ru.lst ./ipinfo_by.lst ./dbip_ru.lst ./dbip_by.lst ./direct.txt; do
             if [ -f "$f" ]; then
               cat "$f" >> ./tmp/text/prepare.txt
@@ -112,7 +128,7 @@ jobs:
           
           python3 ipset_ops.py --mode diff \
             --A ./tmp/text/prepare.txt \
-            --B ./refilter.txt,./antifilternetwork.txt,./antifilterdownloadcommunity.txt,./refiltercommunity.txt,./cdn.lst,./merged.sum,./list-del.txt \
+            --B ./ban-ru.txt,./cdn.txt,./threema.txt,./custom.txt,./list-del.txt \
             --out ./tmp/text/final.txt
 
           ./geoip -c config.json
@@ -199,7 +215,7 @@ jobs:
 
       - name: Publish release
         if: github.ref_name == 'master'
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ env.DAILY_TAG }}
           name: ${{ env.DAILY_TAG }}

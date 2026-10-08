@@ -10,6 +10,24 @@
             }
         },
         {
+            "type": "text",
+            "action": "add",
+            "args": {
+                "name": "ban-ru",
+                "uri": "./ban-ru.txt",
+                "onlyIPType": "ipv4"
+            }
+        },
+        {
+            "type": "text",
+            "action": "add",
+            "args": {
+                "name": "cdn",
+                "uri": "./cdn.txt",
+                "onlyIPType": "ipv4"
+            }
+        },
+        {
             "type": "private",
             "action": "add"
         },
@@ -26,7 +44,8 @@
             "action": "add",
             "args": {
                 "name": "threema",
-                "uri": "./threema.txt"
+                "uri": "./threema.txt",
+                "onlyIPType": "ipv4"
             }
         },
         {
@@ -34,7 +53,8 @@
             "action": "add",
             "args": {
                 "name": "roblox",
-                "uri": "./roblox.txt"
+                "uri": "./roblox.txt",
+                "onlyIPType": "ipv4"
             }
         },
         {
@@ -42,7 +62,8 @@
             "action": "add",
             "args": {
                 "name": "custom",
-                "uri": "./custom.txt"
+                "uri": "./custom.txt",
+                "onlyIPType": "ipv4"
             }
         },
         {
@@ -50,7 +71,8 @@
             "action": "add",
             "args": {
                 "name": "whitelist",
-                "uri": "https://raw.githubusercontent.com/Noktomezo/RussiaFancyLists/main/lists/whitelist/cidr.lst"
+                "uri": "./whitelist.txt",
+                "onlyIPType": "ipv4"
             }
         },
         {
@@ -58,7 +80,8 @@
             "action": "add",
             "args": {
                 "name": "discord",
-                "uri": "https://raw.githubusercontent.com/fatyzzz/ipset-discord/refs/heads/main/discord.txt"
+                "uri": "https://raw.githubusercontent.com/fatyzzz/ipset-discord/refs/heads/main/discord.txt",
+                "onlyIPType": "ipv4"
             }
         },
         {
@@ -66,31 +89,8 @@
             "action": "add",
             "args": {
                 "name": "discord",
-                "uri": "https://raw.githubusercontent.com/GhostRooter0953/discord-voice-ips/refs/heads/master/voice_domains/discord-voice-ip-list"
-            }
-        },
-        {
-            "type": "text",
-            "action": "add",
-            "args": {
-                "name": "ban-ru",
-                "uri": "https://raw.githubusercontent.com/1andrevich/Re-filter-lists/refs/heads/main/ipsum.lst"
-            }
-        },
-        {
-            "type": "text",
-            "action": "add",
-            "args": {
-                "name": "ban-ru",
-                "uri": "https://antifilter.network/download/ipsum.lst"
-            }
-        },
-        {
-            "type": "text",
-            "action": "add",
-            "args": {
-                "name": "ban-ru",
-                "uri": "https://antifilter.network/download/subnet.lst"
+                "uri": "https://raw.githubusercontent.com/GhostRooter0953/discord-voice-ips/refs/heads/master/voice_domains/discord-voice-ip-list",
+                "onlyIPType": "ipv4"
             }
         }
     ],
