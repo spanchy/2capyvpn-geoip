@@ -73,25 +73,26 @@ jobs:
           set -euo pipefail
           CURL="curl -fsSL --retry 3 --retry-delay 2 --retry-connrefused"
 
-          $CURL -o russiafancy-full.lst https://raw.githubusercontent.com/Noktomezo/RussiaFancyLists/main/lists/blacklist/ipsets/full.lst
           $CURL -o antifilter-allyouneed.lst https://antifilter.download/list/allyouneed.lst
+          $CURL -o eduard256.txt https://raw.githubusercontent.com/eduard256/russia-blocked-ips/main/ip.txt
           $CURL -o russiafancy-cdn.lst https://raw.githubusercontent.com/Noktomezo/RussiaFancyLists/main/lists/blacklist/ipsets/cdn.lst
-          $CURL -o discord-ipset.txt https://raw.githubusercontent.com/fatyzzz/ipset-discord/refs/heads/main/discord.txt
           $CURL -o discord-voice.txt https://raw.githubusercontent.com/GhostRooter0953/discord-voice-ips/refs/heads/master/voice_domains/discord-voice-ip-list
           $CURL -o whitelist-source.lst https://raw.githubusercontent.com/Noktomezo/RussiaFancyLists/main/lists/whitelist/cidr.lst
-          test -s russiafancy-full.lst
           test -s antifilter-allyouneed.lst
+          test -s eduard256.txt
           test -s russiafancy-cdn.lst
-          test -s discord-ipset.txt
           test -s discord-voice.txt
           test -s whitelist-source.lst
 
           $CURL -o geolite_ru.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/geolite2-geo-whois-asn-country-ipv4/ru.lst
           $CURL -o geolite_by.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/geolite2-geo-whois-asn-country-ipv4/by.lst
+          $CURL -o geolite_kz.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/geolite2-geo-whois-asn-country-ipv4/kz.lst
           $CURL -o ipinfo_ru.lst https://raw.githubusercontent.com/Davoyan/ipinfo/refs/heads/main/geo/geoip/ru.lst
           $CURL -o ipinfo_by.lst https://raw.githubusercontent.com/Davoyan/ipinfo/refs/heads/main/geo/geoip/by.lst
+          $CURL -o ipinfo_kz.lst https://raw.githubusercontent.com/Davoyan/ipinfo/refs/heads/main/geo/geoip/kz.lst
           $CURL -o dbip_ru.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/dbip-country-ipv4/ru.lst
           $CURL -o dbip_by.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/dbip-country-ipv4/by.lst
+          $CURL -o dbip_kz.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/dbip-country-ipv4/kz.lst
           
       - name: Build geoip tool
         working-directory: geoip
@@ -109,7 +110,7 @@ jobs:
           : > ./tmp/text/prepare.txt
 
           python3 ipset_ops.py --mode union \
-            --set ./russiafancy-full.lst,./antifilter-allyouneed.lst,./threema.txt,./custom.txt,./discord-ipset.txt,./discord-voice.txt \
+            --set ./antifilter-allyouneed.lst,./eduard256.txt,./threema.txt,./custom.txt,./discord-voice.txt \
             --out ./ban-ru.txt
           python3 ipset_ops.py --mode union \
             --set ./russiafancy-cdn.lst \
@@ -119,7 +120,7 @@ jobs:
             --B ./ban-ru.txt \
             --out ./whitelist.txt
 
-          for f in ./geolite_ru.lst ./geolite_by.lst ./ipinfo_ru.lst ./ipinfo_by.lst ./dbip_ru.lst ./dbip_by.lst ./direct.txt; do
+          for f in ./geolite_ru.lst ./geolite_by.lst ./geolite_kz.lst ./ipinfo_ru.lst ./ipinfo_by.lst ./ipinfo_kz.lst ./dbip_ru.lst ./dbip_by.lst ./dbip_kz.lst ./direct.txt; do
             if [ -f "$f" ]; then
               cat "$f" >> ./tmp/text/prepare.txt
               printf '\n' >> ./tmp/text/prepare.txt
