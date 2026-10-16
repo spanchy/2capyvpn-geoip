@@ -74,10 +74,12 @@ jobs:
           CURL="curl -fsSL --retry 3 --retry-delay 2 --retry-connrefused"
 
           $CURL -o antifilter-allyouneed.lst https://antifilter.download/list/allyouneed.lst
+          $CURL -o eduard256.txt https://raw.githubusercontent.com/eduard256/russia-blocked-ips/main/ip.txt
           $CURL -o russiafancy-cdn.lst https://raw.githubusercontent.com/Noktomezo/RussiaFancyLists/main/lists/blacklist/ipsets/cdn.lst
           $CURL -o discord-voice.txt https://raw.githubusercontent.com/GhostRooter0953/discord-voice-ips/refs/heads/master/voice_domains/discord-voice-ip-list
           $CURL -o whitelist-source.lst https://raw.githubusercontent.com/Noktomezo/RussiaFancyLists/main/lists/whitelist/cidr.lst
           test -s antifilter-allyouneed.lst
+          test -s eduard256.txt
           test -s russiafancy-cdn.lst
           test -s discord-voice.txt
           test -s whitelist-source.lst
@@ -108,7 +110,7 @@ jobs:
           : > ./tmp/text/prepare.txt
 
           python3 ipset_ops.py --mode union \
-            --set ./antifilter-allyouneed.lst,./threema.txt,./custom.txt,./discord-voice.txt \
+            --set ./antifilter-allyouneed.lst,./eduard256.txt,./threema.txt,./custom.txt,./discord-voice.txt \
             --out ./ban-ru.txt
           python3 ipset_ops.py --mode union \
             --set ./russiafancy-cdn.lst \
