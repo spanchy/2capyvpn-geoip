@@ -5,8 +5,7 @@
             "action": "add",
             "args": {
                 "name": "direct",
-                "uri": "./tmp/text/final.txt",
-                "onlyIPType": "ipv4"
+                "uri": "./tmp/text/final.txt"
             }
         },
         {
@@ -14,8 +13,7 @@
             "action": "add",
             "args": {
                 "name": "ban-ru",
-                "uri": "./ban-ru.txt",
-                "onlyIPType": "ipv4"
+                "uri": "./ban-ru.txt"
             }
         },
         {
@@ -23,8 +21,7 @@
             "action": "add",
             "args": {
                 "name": "cdn",
-                "uri": "./cdn.txt",
-                "onlyIPType": "ipv4"
+                "uri": "./cdn.txt"
             }
         },
         {
@@ -44,8 +41,7 @@
             "action": "add",
             "args": {
                 "name": "threema",
-                "uri": "./threema.txt",
-                "onlyIPType": "ipv4"
+                "uri": "./threema.txt"
             }
         },
         {
@@ -53,8 +49,7 @@
             "action": "add",
             "args": {
                 "name": "roblox",
-                "uri": "./roblox.txt",
-                "onlyIPType": "ipv4"
+                "uri": "./roblox.txt"
             }
         },
         {
@@ -62,8 +57,7 @@
             "action": "add",
             "args": {
                 "name": "custom",
-                "uri": "./custom.txt",
-                "onlyIPType": "ipv4"
+                "uri": "./custom.txt"
             }
         },
         {
@@ -71,8 +65,7 @@
             "action": "add",
             "args": {
                 "name": "whitelist",
-                "uri": "./whitelist.txt",
-                "onlyIPType": "ipv4"
+                "uri": "./whitelist.txt"
             }
         },
         {
@@ -80,17 +73,7 @@
             "action": "add",
             "args": {
                 "name": "discord",
-                "uri": "https://raw.githubusercontent.com/fatyzzz/ipset-discord/refs/heads/main/discord.txt",
-                "onlyIPType": "ipv4"
-            }
-        },
-        {
-            "type": "text",
-            "action": "add",
-            "args": {
-                "name": "discord",
-                "uri": "https://raw.githubusercontent.com/GhostRooter0953/discord-voice-ips/refs/heads/master/voice_domains/discord-voice-ip-list",
-                "onlyIPType": "ipv4"
+                "uri": "https://raw.githubusercontent.com/GhostRooter0953/discord-voice-ips/refs/heads/master/voice_domains/discord-voice-ip-list"
             }
         }
     ],
